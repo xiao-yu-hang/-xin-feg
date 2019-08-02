@@ -5,33 +5,41 @@ CREATE DATABASE xinfeg CHARST=UTF8;
 #留言信息表
 USE xinfeg;
 CREATE TABLE user_Message(
-   uid PRIMARY AUTO_INCREMENT,#被留言用户
+   uid_Message_id PRIMARY AUTO_INCREMENT,#被留言id
+   uid NOT NULL,#谁的好友
    user_Message_personal_id　INT NOT NULL,#留言用户
    user_Message VARCHAR(100)#留言信息
 )
+
+INSERT INTO user_Message VALUES(0,123456787,123456789,"加油，努力，奋斗！")
+INSERT INTO user_Message VALUES(1,123456786,123456789,"加油，努力，奋斗！")
+INSERT INTO user_Message VALUES(2,123456785,123456789,"加油，努力，奋斗！")
 
 #图片仓库
 USE xinfeg;
 CREATE TABLE img(
   img_id PRIMARY KEY AUTO_INCREMENT,#仓库图片ID
-  img_icon VARCHAR(10) not NULL,#图片标签
+  img_icon VARCHAR(50) NOT NULL,#图片标签
   img_index VARCHAR(100) UNIQUE NOT NULL #图片地址
 )
+INSERT
+
 
 #用户主页图片
 USE xinfeg;
 CREATE TABLE user_home_img(
-  uid INT PRIMARY KEY , #图片拥有者
+  img_id PRIMARY KEY AUTO_INCREMENT,#仓库图片ID
+  uid INT , #图片拥有者
   user_personal_img() UNIQUE,#用户图片ID
   user_liked_num INT,#点赞人数
-  user_img0_introduction VARCHAR(50),#图片介绍
+  user_img0_introduction VARCHAR(50)#图片介绍
 )
 
 #好友列表
 USE xinfeg;
 CREATE TABLE user_friend{
-  uid INT
-   PRIMARY KEY,
+  user_onfriend_id INT PRIMARY KEY,#这条数据的id
+  uid INT NOT NULL,
   user_friend_id  INT UNIQUE,#用户好友iD
   user_status bool,#1在线 0离线 用户状态
   user_index VARCHAR(100) UNIQUE NOT NULL #用户主页地址
@@ -41,12 +49,10 @@ CREATE TABLE user_friend{
 USE xinfeg;
 CREATE TABLE user_info( 
   uid INT PRIMARY KEY,
-  user_introduction VARCHAR(100),#用户介绍
-  user_head_img VARCHAR(100) NOT NULL,#用户头像地址
-  user_personal_img_index VARCHAR(),#用户拥有图片
-  user_friend_id INT UNIQUE,#用户好友
-  FOREIGN KEY(uid) REFERENCES user_img(uid),
-  FOREIGN KEY(uid) REFERENCES user_friend(uid),
+  user_introduction VARCHAR(100), #用户介绍
+  user_head_img VARCHAR(100) NOT NULL, #用户头像地址
+  user_personal_img_num VARCHAR(), #用户拥有图片的仓库ID，格式类似于 1/2/4/9/10
+  user_friend_id_num VARCHAR() UNIQUE #用户好友数据ID，格式类似于 1/2/4/9/10
 )
 
 #用户登录/注册
@@ -73,7 +79,7 @@ CREATE TABLE user_temporary(
   uid INT PRIMARY KEY,
   upwd VARCHAR(16) NOT NULL,
   user_temporary_id AUTO_INCREMENT, #用户临时ID
-  user_sex BOOL DEFAULT "秘密",#1男 0女
-  FOREIGN KEY(uid) REFERENCES user_info(uid)
+  user_start_time DATATIME,#游客对象创建的时间
+  user_sex BOOL DEFAULT "秘密" #1男 0女
 )
  
