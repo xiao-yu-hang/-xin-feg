@@ -76,7 +76,7 @@ router.post("/v1/reg",(req,res)=>{
   // }
   sql="INSERT INTO user_login SET ?";
   pool.query(sql,[obj],function(err,result){
-    res.send({code:200,msg:"reg suc"});
+    res.writeHead(301, {'Location':""});
   });
 });
 
