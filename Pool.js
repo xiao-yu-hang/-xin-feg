@@ -6,6 +6,7 @@ var pool=mysql.createPool({
   password:"",
   charset:"utf8",
   connectionLimit:20,
-  database:"xinfeg"
+  database:"xinfeg",
+  multipleStatements:true
 });
 module.exports=pool;

@@ -40,7 +40,7 @@ router.delete("/v1/deleteFriend",(req,res)=>{
   var $imgLikedNum=req.query.userLikedNum;
   var $imgLK=parseInt($imgLikedNum)-1;
   var sql="update img set user_liked_num = ? where img_id = ?";
-  pool.query(sql,[$imgId,$imgLK],(err,result)=>{
+  pool.query(sql,[$imgLK,$imgId],(err,result)=>{
     if(err) throw err;
     if(result.affectedRows>0)
     {

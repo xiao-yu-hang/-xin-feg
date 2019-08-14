@@ -27,7 +27,7 @@ router.get("/v1/setImg",(err,result)=>{
   var $chose2=obj.Chose2;
   var $imgId=obj.imgId; 
   if($imgIcon!==undefined){
-  var sql="select img_index from img where img_inco =　? and user_name = null LIMIT 0,12";
+  var sql="select img_index from img where img_inco =　? and user_name is null LIMIT 0,12";
   pool.query(sql,[$imgIcon],(err,result)=>{
     if(err) throw err;
     if(result>0)
@@ -51,7 +51,7 @@ router.get("/v1/setImg",(err,result)=>{
   }
   if($chose1!==undefined)
   {
-    var sql="select img_icon from img where user_name = null LIMIT 0,5";
+    var sql="select img_icon from img where user_name is null LIMIT 0,5";
     pool.query(sql,(err,result)=>{
       if(err)throw err;
       if(result>0){
@@ -63,7 +63,7 @@ router.get("/v1/setImg",(err,result)=>{
   }
   if($chose2!==undefined)
   {
-    var sql="select img_icon from img where user_name!=null order by user_liked_num desc LIMIT 0,5";
+    var sql="select img_icon from img where user_name is not null order by user_liked_num desc LIMIT 0,5";
     pool.query(sql,(err,result)=>{
       if(err) throw err
       if(result>0){

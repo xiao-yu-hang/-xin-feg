@@ -8,8 +8,8 @@ router.put("/v1/putImg",(req,res)=>{
   var $uname=req.body.userName;
   var $imgId1=req.body.imgId1;
   var $imgId2=req.body.imgId2;
-  var sql="update img set user_name = null where img_id = ?;update img set user_name = ? where img_id = ?";
-  pool.query(sql,[$imgId1,$imgId2,$uname],(err,result)=>{
+  var sql="update img set user_name = null user_liked_num=0 where img_id = ?;update img set user_name = ? where img_id = ?";
+  pool.query(sql,[$imgId1,$uname,$imgId2],(err,result)=>{
     if(err)throw err;
     if(result[0].affectedRows>0&&result[1].affectedRows>0)
     {
@@ -18,6 +18,7 @@ router.put("/v1/putImg",(req,res)=>{
       var sql="update img set user_name = ? where img_id = ?";
       pool.query(sql,[$imgId1,$uname],(err,result)=>{
         if(err) throw err;
+        if(result.affectedRows>0)
         res.send("0");
       });
     }else{
@@ -31,7 +32,7 @@ router.put("/v1/putInfo",(req,res)=>{
   var obj=req.body;
   var $uname=obj.userName;
   var sql="update user_info set ? where user_name = ?";
-  pool.query(sql,[$uname,obj],(err,result)=>{
+  pool.query(sql,[obj,$uname],(err,result)=>{
     if(err)throw err;
     if(result.affectedRows>0)
     {
