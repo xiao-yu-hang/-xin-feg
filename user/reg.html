@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../boot/bootstrap.css"/>
+    <script src="../boot/jquery.min.js"></script>
+    <script src="../boot/popper.min.js"></script>
+    <script src="../boot/bootstrap.min.js"></script>
+    <script src="reg.js"></script>
+    <title>Document</title>
+    <style>
+    </style>
+</head>
+<body>
+    <div>
+      <div class="container">
+        <div class="">  
+          <div class="">
+              <form>
+                <h1 class="text-left my-4 border-dark border-bottom">用户注册</h1>
+                <div class="form-group row mx-0">
+                  <label for="user" class="col-2 text-right">用户名:</label>
+                  <input type="text" name="" id="username" class="form-control  mr-2 text-muted col-4" placeholder="请输入用户名" aria-describedby="helpId"> 
+                  <small class="text-muted pt-2">用户名可用</small> 
+                </div>
+                <div class="form-group row mx-0">
+                  <label for="pwd" class=" text-left pl-3 text-right col-2">密码:</label>
+                  <input type="text" name="" id="pwd" class="form-control mr-2  text-muted  col-4" placeholder="请输入密码" aria-describedby="helpId">
+                  <small class="text-muted pt-2">密码</small> 
+                </div>
+                <div class="form-group row mx-0" >
+                  <label for="" class=" text-left pl-3 text-right col-2">出生日期:</label>
+                  <input type="date" value="2019-8-1" class="form-control mr-2 col-4">
+                </div>
+                <div class="btn-group w-100 p-0 row mx-0" data-toggle="buttons">
+                  <span class=" text-right pl-3 col-2">性别:</span>
+                  <div class="col-4">
+                  <label class="btn btn-primary active py-0 pt-1">
+                    <input type="radio" name="sex" id="m" autocomplete="off" class="" checked>
+                    <label for="m">男</label>
+                  </label>
+                  <label class="btn btn-primary py-0 pt-1">
+                    <input type="radio" name="sex" id="fm" autocomplete="off" class="">
+                    <label for="fm">女</label>
+                  </label>
+                </div>
+                </div>
+                <div class="text-center my-5 row mx-0">
+                  <div class="col-2"></div>
+                  <button type="button" class="btn btn-primary col-4 ">注册</button>
+                </div>
+                
+              </form> 
+          </div> 
+        </div>
+      </div>
+    </div>
+</body>
+</html>

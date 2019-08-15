@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+ 
+    <style>
+      *{
+        margin:0;padding: 0;
+        box-sizing: border-box;
+      }
+    .center-center{   
+            width:400px;
+            height: 340px;
+            position: absolute;   
+            top: 50%;   
+            left: 50%;   
+            -webkit-transform: translate(-50%, -50%);   
+            -moz-transform: translate(-50%, -50%);   
+            -ms-transform: translate(-50%, -50%);   
+            -o-transform: translate(-50%, -50%);   
+            transform: translate(-50%, -50%);
+            border: 1px solid gainsboro;
+            border-radius: 4px;
+        }
+        .pic-tag{
+          display:block;
+          width: 25%;
+          float: left;
+          text-align: center;
+          padding: 30px 0;
+        }
+        .pic-tag:hover{
+          cursor: pointer;
+          background-color: #eee;
+          border: 1px solid #eee;
+          border-radius: 3px;
+        }
+        .tag-group::after{
+          content: "";
+          display: block;
+          clear:both;
+        }
+        #btn{
+          width: 340px;
+          height: 40px;
+          float: right;
+          background: -webkit-linear-gradient(top, #27b1f6 0%, #0aa1ed 100%);
+          border-style: none;
+          border-radius: 4px;
+          color: #fff;
+          font-size: 16px;
+          margin-right:34px;
+          margin-top:18px;
+          
+        }
+        h5{
+          margin-left: 20px;
+          margin-top:10px;
+        }
+  </style>
+</head>
+<body>
+    <div class="center-center">
+      <h5>请选择感兴趣的标签:</h5>
+      <div class="tag-group">
+        <span class="pic-tag">标签</span>
+        <span class="pic-tag">标签</span>
+        <span class="pic-tag">标签</span>
+        <span class="pic-tag">标签</span>
+      </div>
+      <div class="tag-group">
+          <span class="pic-tag">标签</span>
+          <span class="pic-tag">标签</span>
+          <span class="pic-tag">标签</span>
+          <span class="pic-tag">标签</span>
+        </div>
+        <div class="tag-group">
+            <span class="pic-tag">标签</span>
+            <span class="pic-tag">标签</span>
+            <span class="pic-tag">标签</span>
+            <span class="pic-tag">标签</span>
+          </div>
+        <div class="tag-group">
+          <button id="btn">确定</button>
+        </div>
+    </div>    
+ 
+</body>
+</html>
