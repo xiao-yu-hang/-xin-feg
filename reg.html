@@ -4,10 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="../boot/bootstrap.css"/>
-    <script src="../boot/jquery.min.js"></script>
-    <script src="../boot/popper.min.js"></script>
-    <script src="../boot/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="boot/bootstrap.css"/>
+    <script src="boot/jquery.min.js"></script>
+    <script src="boot/popper.min.js"></script>
+    <script src="boot/bootstrap.min.js"></script>
+    <script src="reg.js"></script>
     <title>Document</title>
     <style>
     </style>
@@ -20,22 +21,17 @@
               <form>
                 <h1 class="text-left my-4 border-dark border-bottom">用户注册</h1>
                 <div class="form-group row mx-0">
-                  <label for="user" class="col-2 text-right mb-0">用户名:</label>
-                  <input type="text" id="username" class="form-control  mr-2 text-muted col-4" placeholder="请输入用户名"> 
-                  <small class="text-muted pt-2">用户名必须4-16位之间,不包含中文</small> 
+                  <label for="user" class="col-2 text-right">用户名:</label>
+                  <input type="text" name="" id="username" class="form-control  mr-2 text-muted col-4" placeholder="请输入用户名" aria-describedby="helpId"> 
+                  <small class="text-muted pt-2">用户名可用</small> 
                 </div>
-                <div class="form-group row mx-0 ">
-                  <label for="pwd" class=" text-left pl-3 text-right col-2 mb-0">密码:</label>
-                    <input type="password"  id="pwd" class="form-control mr-2 text-muted  col-4" placeholder="请输入密码">                 
-                    <small class="text-muted pt-2">密码必须包含数字、大小写字母，且至少六位</small> 
+                <div class="form-group row mx-0">
+                  <label for="pwd" class=" text-left pl-3 text-right col-2">密码:</label>
+                  <input type="text" name="" id="pwd" class="form-control mr-2  text-muted  col-4" placeholder="请输入密码" aria-describedby="helpId">
+                  <small class="text-muted pt-2">密码</small> 
                 </div>
-                <div class="form-group row mx-0 ">
-                    <label for="pwd" class=" text-left pl-3 text-right col-2 mb-0">确认密码:</label>
-                      <input type="password"  id="pwd" class="form-control mr-2 text-muted  col-4" placeholder="请输入密码">                 
-                      <small class="text-muted pt-2">请再次输入密码</small> 
-                  </div>
                 <div class="form-group row mx-0" >
-                  <label for="" class=" text-left pl-3 text-right col-2 mb-0">出生日期:</label>
+                  <label for="" class=" text-left pl-3 text-right col-2">出生日期:</label>
                   <input type="date" value="2019-8-1" class="form-control mr-2 col-4">
                 </div>
                 <div class="btn-group w-100 p-0 row mx-0" data-toggle="buttons">
@@ -61,8 +57,5 @@
         </div>
       </div>
     </div>
-    <script src="jquery-1.11.3.js"></script>
-    <script src="reg.js">
-    </script>
 </body>
 </html>
