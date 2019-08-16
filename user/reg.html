@@ -8,7 +8,6 @@
     <script src="../boot/jquery.min.js"></script>
     <script src="../boot/popper.min.js"></script>
     <script src="../boot/bootstrap.min.js"></script>
-    <script src="reg.js"></script>
     <title>Document</title>
     <style>
     </style>
@@ -22,8 +21,8 @@
                 <h1 class="text-left my-4 border-dark border-bottom">用户注册</h1>
                 <div class="form-group row mx-0">
                   <label for="user" class="col-2 text-right">用户名:</label>
-                  <input type="text" name="" id="username" class="form-control  mr-2 text-muted col-4" placeholder="请输入用户名" aria-describedby="helpId"> 
-                  <small class="text-muted pt-2">用户名可用</small> 
+                  <input type="text" id="username" class="form-control  mr-2 text-muted col-4" placeholder="请输入用户名" aria-describedby="helpId"> 
+                  <small class="text-muted pt-2">用户名必须4-16位之间,不包含中文</small> 
                 </div>
                 <div class="form-group row mx-0">
                   <label for="pwd" class=" text-left pl-3 text-right col-2">密码:</label>
@@ -57,5 +56,8 @@
         </div>
       </div>
     </div>
+    <script src="jquery-1.11.3.js"></script>
+    <script src="reg.js">
+    </script>
 </body>
 </html>
