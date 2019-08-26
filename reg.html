@@ -1,61 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="boot/bootstrap.css"/>
-    <script src="boot/jquery.min.js"></script>
-    <script src="boot/popper.min.js"></script>
-    <script src="boot/bootstrap.min.js"></script>
-    <script src="reg.js"></script>
-    <title>Document</title>
-    <style>
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="boot/vue.js"></script>
+  <style>
+    .regform{
+      width: 1000px;
+      margin: auto;
+    }
+    .ipt{
+      width:720px;
+      clear: both;
+      margin-bottom: 20px;
+    }
+    .ipt:after{
+      content: "";
+      display: block;
+      clear: both;
+    }
+    input{
+      display: block;
+      float:left;
+      width: 328px;
+      height: 16px;
+      border:1px solid #ddd;
+      padding: 12px 10px;
+      font-size: 16px;
+      color:#666;
+    }
+    .ipt span{
+      display: block;
+      float: left;
+      width:90px;
+      height: 42px;
+      text-align: right;
+      line-height: 42px;
+      margin-right:20px; 
+    }
+    input.sex{
+      width:50px;
+      margin-top:12px;
+    }
+    input.sex+span{
+      text-align: left;
+    }
+    .ipt .hidden{
+      width: 180px;
+      font-size: 12px;
+      text-align: left;
+      padding-left:10px;
+    }
+  </style>
 </head>
 <body>
-    <div>
-      <div class="container">
-        <div class="">  
-          <div class="">
-              <form>
-                <h1 class="text-left my-4 border-dark border-bottom">用户注册</h1>
-                <div class="form-group row mx-0">
-                  <label for="user" class="col-2 text-right">用户名:</label>
-                  <input type="text" name="" id="username" class="form-control  mr-2 text-muted col-4" placeholder="请输入用户名" aria-describedby="helpId"> 
-                  <small class="text-muted pt-2">用户名可用</small> 
-                </div>
-                <div class="form-group row mx-0">
-                  <label for="pwd" class=" text-left pl-3 text-right col-2">密码:</label>
-                  <input type="text" name="" id="pwd" class="form-control mr-2  text-muted  col-4" placeholder="请输入密码" aria-describedby="helpId">
-                  <small class="text-muted pt-2">密码</small> 
-                </div>
-                <div class="form-group row mx-0" >
-                  <label for="" class=" text-left pl-3 text-right col-2">出生日期:</label>
-                  <input type="date" value="2019-8-1" class="form-control mr-2 col-4">
-                </div>
-                <div class="btn-group w-100 p-0 row mx-0" data-toggle="buttons">
-                  <span class=" text-right pl-3 col-2">性别:</span>
-                  <div class="col-4">
-                  <label class="btn btn-primary active py-0 pt-1">
-                    <input type="radio" name="sex" id="m" autocomplete="off" class="" checked>
-                    <label for="m">男</label>
-                  </label>
-                  <label class="btn btn-primary py-0 pt-1">
-                    <input type="radio" name="sex" id="fm" autocomplete="off" class="">
-                    <label for="fm">女</label>
-                  </label>
-                </div>
-                </div>
-                <div class="text-center my-5 row mx-0">
-                  <div class="col-2"></div>
-                  <button type="button" class="btn btn-primary col-4 ">注册</button>
-                </div>
-                
-              </form> 
-          </div> 
-        </div>
+  <div id="app">
+    <div id="head"></div>
+    <h2>注册账号</h2>
+    <form class="regform">
+      <div class="ipt"><label><span>用户名</span><input type="text" placeholder="请输入用户名"></label>
+        <span class="hidden">用户名6-16位,禁止使用符号</span>
       </div>
-    </div>
+      <div class="ipt"><label><span>密码</span><input type="password" placeholder="请输入密码"></label></div>
+      <div class="ipt"><label><span>再输入密码</span><input type="password" placeholder="请再输入密码"></label></div>
+      <div class="ipt"><label><span>手机号</span><input type="text" placeholder="请输入手机号"></label></div>
+      <div class="ipt"><label><span>邮箱</span><input type="text" placeholder="请输入邮箱"></label></div>
+      <div class="ipt"><span>出生日期</span><input type="date"></div>
+      <div class="ipt"><span>性别</span>
+        <label><input type="radio" class="sex" name="sex"><span>男</span></label>
+        <label><input type="radio" class="sex" name="sex"><span>女</span></label>
+      </div>  
+    </form>
+  </div>
+  <script>
+    var vm=new Vue({
+      el:"#app",
+      data:{
+
+      }
+    })
+  </script>
 </body>
 </html>
