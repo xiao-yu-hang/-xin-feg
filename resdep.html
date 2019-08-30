@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="boot/vue.js"></script>
+  <script src="boot/axios.min.js"></script>
+  <script src="boot/qs.min.js"></script>
+  <style>
+    *{
+      box-sizing: border-box;
+    }
+    #header{
+      width: 1000px;
+      height: 75px;
+      margin: auto;
+
+    }
+    #nav{
+      width: 1000px;
+      margin: auto;
+      height: 1px;
+      box-shadow: 0px 4px 3px #666;
+    }
+    .taglist{
+      width: 1000px;
+      margin: auto;
+    }
+    .taglist a{
+      width: 120px;
+      height: 50px;
+      display: block;
+      border: 2px solid;
+      border-radius:5px; 
+      text-align: center;
+      line-height: 50px;
+      font-size: 18px;
+      text-decoration: none;
+      cursor: pointer;
+      margin: auto
+    }
+    .taglist a:hover{
+      opacity: 0.5;
+    }
+    .item{
+      float: left;
+      width: 250px;
+      height: 50px;
+      margin-top: 40px;
+    }
+    a.checked{
+      color:#fff;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <header>
+      <div id="header">
+        <p>尊敬的xxx，早上好！欢迎来到新风格，请选择你喜欢的5张风格图片</p>
+      </div>
+      <div id="nav"></div>
+    </header>
+    <div class="taglist" @click="change">
+      <!-- <div class="tab">
+        <a href="javasript:;"  :style="{'border-color':`${this.taglist[0].bdcol}`}" @click="change">淡雅</a>
+        <a href="" id="2">动漫</a>
+        <a href="" id="3">风景</a>
+        <a href="" id="4">搞笑</a>
+      </div>
+      <div class="tab">
+        <a href="" id="5">简约</a>
+        <a href="" id="6">清新</a>
+        <a href="" id="7">炫酷</a>
+        <a href="" id="8">电影</a>
+      </div>
+      <div class="tab">
+        <a href="" id="9">人物</a>
+        <a href="" id="10">萌宠</a>
+        <a href="" id="11">暗黑</a>
+        <a href="" id="12">游戏</a>
+      </div> -->
+      <div class="item" v-for="(item,i) of taglist" :key="i" :data-i="i">
+        <a href="javascript:;" :style="bgcolor" class="">{{taglist[i].name}}</a>
+      </div>
+    </div>
+  </div>
+  <script>
+    var vm=new Vue({
+      el:"#app",
+      data:{ 
+        bgcolor:{
+          background:"#fff",
+          'border-color':"#67c23a",
+          color:"#67c23a"
+        },
+        taglist:[{id:0,name:"淡雅",bdcol:"#67c23a"},
+        {id:1,name:"动漫",bdcol:"#67c23a"},
+        {id:2,name:"风景",bdcol:"#67c23a"},
+        {id:3,name:"搞笑",bdcol:"#67c23a"},
+        {id:4,name:"简约",bdcol:"#67c23a"}]
+      },
+      methods: {
+        change(e){
+          if(e.target.nodeName=="A"){
+            if(e.target.className==""){
+            var i=parseInt(e.target.dataset.i);
+            e.target.style.background="#67c23a";
+            e.target.style.color="#fff";
+            e.target.className="checked";
+            }else{
+            e.target.className="";
+            e.target.style.background="#fff";
+            e.target.style.color="#67c23a";
+            }
+          }
+        }
+      },
+    })
+  </script>
+</body>
+</html>

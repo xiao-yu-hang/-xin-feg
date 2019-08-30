@@ -6,13 +6,20 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
   <script src="boot/vue.js"></script>
+  <script src="boot/axios.min.js"></script>
+  <script src="boot/qs.min.js"></script>
   <style>
+    h2{
+      position: relative;
+      left:312px;
+      margin-bottom: 30px
+    }
     .regform{
       width: 1000px;
       margin: auto;
     }
     .ipt{
-      width:720px;
+      width:800px;
       clear: both;
       margin-bottom: 20px;
     }
@@ -48,10 +55,32 @@
       text-align: left;
     }
     .ipt .hidden{
-      width: 180px;
+      width: 250px;
       font-size: 12px;
       text-align: left;
       padding-left:10px;
+    }
+    .btn input{
+      position: relative;
+      width: 350px;
+      height: 40px;
+      padding: 0;
+      background-color: #3f89ec;
+      border-radius: 4px;
+      color:#fff;
+      cursor:pointer;
+    }
+    .btn{
+      display: block;
+      position: relative;
+      left:110px;
+      width: 350px;
+      height: 40px;
+      
+    }
+    .ipt img{
+      position: relative;
+      top:3px;
     }
   </style>
 </head>
@@ -60,26 +89,140 @@
     <div id="head"></div>
     <h2>注册账号</h2>
     <form class="regform">
-      <div class="ipt"><label><span>用户名</span><input type="text" placeholder="请输入用户名"></label>
-        <span class="hidden">用户名6-16位,禁止使用符号</span>
+      <div class="ipt"><label><span>用户名</span><input type="text" v-model="uname" @input="checkUname" placeholder="请输入用户名"></label>
+        <span class="hidden" v-html="name"></span>
       </div>
-      <div class="ipt"><label><span>密码</span><input type="password" placeholder="请输入密码"></label></div>
-      <div class="ipt"><label><span>再输入密码</span><input type="password" placeholder="请再输入密码"></label></div>
-      <div class="ipt"><label><span>手机号</span><input type="text" placeholder="请输入手机号"></label></div>
-      <div class="ipt"><label><span>邮箱</span><input type="text" placeholder="请输入邮箱"></label></div>
-      <div class="ipt"><span>出生日期</span><input type="date"></div>
+      <div class="ipt"><label><span>密码</span><input type="password" v-model="upwd"  @input="checkUpwd" placeholder="请设置密码"></label>
+        <span class="hidden" v-html="pwd"></span>
+      </div>
+      <div class="ipt"><label><span>再输入密码</span><input type="password" v-model="upwd2" placeholder="请再次输入密码" @input="checkUpwd2"></label>
+        <span class="hidden" v-html="pwd2"></span>
+      </div>
+      <div class="ipt"><label><span>手机号</span><input type="text" v-model="phone" @input="checkPhone" placeholder="请输入手机号"></label>
+        <span class="hidden" v-html="phonemsg"></span>
+      </div>
+      <div class="ipt"><label><span>邮箱</span><input type="text" v-model="email" @input="checkEmail" placeholder="请输入邮箱"></label>
+        <span class="hidden" v-html="emailmsg"></span>
+      </div>
+      <div class="ipt"><span>出生日期</span><input type="date" v-model="birth" ></div>
       <div class="ipt"><span>性别</span>
-        <label><input type="radio" class="sex" name="sex"><span>男</span></label>
-        <label><input type="radio" class="sex" name="sex"><span>女</span></label>
-      </div>  
+        <label><input type="radio" class="sex" value="1" v-model:checked="sex"><span>男</span></label>
+        <label><input type="radio" class="sex" value="0" v-model:checked="sex"><span>女</span></label>
+      </div> 
+      <a class="btn" href="#" @click="reg"><input type="button" value="注册"></a> 
     </form>
   </div>
   <script>
     var vm=new Vue({
       el:"#app",
       data:{
-
-      }
+        uname:"",
+        upwd:"",
+        upwd2:"",
+        phone:"",
+        email:"",
+        birth:"",
+        sex:1,
+        name:"用户名6-16位,禁止使用符号",
+        pwd:"包含字母数字6-16位",
+        pwd2:"",
+        phonemsg:"",
+        emailmsg:"",
+        bool:false
+      },
+      methods: {
+        //验证是否注册成功
+        reg(){
+          this.birth==""? this.bool=false : this.bool=true ;
+          if(this.bool==true){
+            alert("注册成功");
+          }else
+            alert("注册失败");
+        },
+        //验证用户名
+        checkUname(){
+          if(this.uname==""){
+            this.name=`<img src="./user/img/err.png">用户名不能为空`;
+            this.bool=false
+          }else{
+            var unameReg=/^[a-zA-Z0-9_-]{6,16}$/;
+            if(unameReg.test(this.uname)==true){
+              // this.axios.get("/",{
+              //   params:{
+              //     uname:this.uname
+              //   }
+              // });
+              this.name=`<img src="./user/img/ok.png">用户名格式正确`
+              this.bool=true
+            }else{
+              this.name=`<img src="./user/img/err.png">用户名必须6-16位,禁止使用符号`
+              this.bool=false
+            }
+          }
+        },
+        //验证密码
+        checkUpwd(){
+          if(this.upwd==""){
+            this.pwd=`<img src="./user/img/err.png">密码不能为空`
+            this.bool=false
+          }else{
+            var upwdReg=/(?![0-9A-Z]+$)(?![0-9a-z]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,16}$/;
+            if(upwdReg.test(this.upwd)==true){
+              this.pwd=`<img src="./user/img/ok.png">密码格式正确`
+              this.bool=true
+            }else{
+              this.pwd=`<img src="./user/img/err.png">密码必须包含数字、大小写字母，且6-16位`
+              this.bool=false
+            }
+          }
+        },
+        //验证再次输入密码
+        checkUpwd2(){
+          if(this.upwd2==""){
+            this.pwd2=`<img src="./user/img/err.png">密码不能为空`
+            this.bool=false
+          }else{
+            if(this.upwd2==this.upwd){
+              this.pwd2=`<img src="./user/img/ok.png">密码一致`
+              this.bool=true
+            }else{
+              this.pwd2=`<img src="./user/img/err.png">密码不一致`
+              this.bool=false
+            }
+          }
+        },
+        //验证手机号
+        checkPhone(){
+          if(this.phone==""){
+            this.phonemsg=`<img src="./user/img/err.png">手机号不能为空`
+            this.bool=false
+          }else{
+            var phoneReg=/^1([38][0-9]|4[579]|5[0-3,5-9]|6[6]|7[0135678]|9[89])\d{8}$/;
+            if(phoneReg.test(this.phone)==true){
+              this.phonemsg=`<img src="./user/img/ok.png">手机号格式正确`
+              this.bool=true
+            }else{
+              this.phonemsg=`<img src="./user/img/err.png">格式不正确`
+              this.bool=false
+            }
+          }
+        },
+        checkEmail(){
+          if(this.email==""){
+            this.emailmsg=`<img src="./user/img/err.png">邮箱不能为空`
+            this.bool=false
+          }else{
+            var emailReg=/^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
+            if(emailReg.test(this.email)==true){
+              this.emailmsg=`<img src="./user/img/ok.png">邮箱可用`
+              this.bool=true
+            }else{
+              this.emailmsg=`<img src="./user/img/err.png">邮箱格式不正确`
+              this.bool=false
+            }
+          }
+        },
+      },
     })
   </script>
 </body>
