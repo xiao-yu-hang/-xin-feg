@@ -5,9 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
-  <script src="boot/vue.js"></script>
-  <script src="boot/axios.min.js"></script>
-  <script src="boot/qs.min.js"></script>
+  <script src="./boot/vue.js"></script>
+  <script src="./boot/axios.min.js"></script>
+  <script src="./boot/qs.min.js"></script>
   <style>
     h2{
       position: relative;
@@ -135,9 +135,26 @@
         reg(){
           this.birth==""? this.bool=false : this.bool=true ;
           if(this.bool==true){
-            alert("注册成功");
-          }else
+            axios.post("http://127.0.0.1:8080/post/v1/postSet",
+            Qs.stringify({
+              user_name:this.uname,
+              user_upwd:this.upwd,
+              user_phone:this.phone,
+              user_email:this.email,
+              user_birthday:this.birth,
+              user_sex:this.sex,
+            })).then(result=>{
+              if(console.data==1){
+                alert("注册成功");
+              }else{
+                alert("注册失败");
+                window.location.reload();
+              }
+            })
+          }else{
             alert("注册失败");
+            window.location.reload();
+          }
         },
         //验证用户名
         checkUname(){
@@ -147,13 +164,21 @@
           }else{
             var unameReg=/^[a-zA-Z0-9_-]{6,16}$/;
             if(unameReg.test(this.uname)==true){
-              // this.axios.get("/",{
-              //   params:{
-              //     uname:this.uname
-              //   }
-              // });
-              this.name=`<img src="./user/img/ok.png">用户名格式正确`
-              this.bool=true
+              axios.get("http://127.0.0.1:8080/get/v1/userGet",
+                {
+                  params:{
+                    uname:this.uname
+                  }
+                }
+              ).then(result=>{
+                if(result.data=="1"){
+                  this.name=`<img src="./user/img/err.png">用户名被占用`
+                }else{
+                  this.name=`<img src="./user/img/ok.png">用户名可用`
+                }
+              });
+              //this.name=`<img src="./user/img/ok.png">用户名格式正确`
+              //this.bool=true
             }else{
               this.name=`<img src="./user/img/err.png">用户名必须6-16位,禁止使用符号`
               this.bool=false

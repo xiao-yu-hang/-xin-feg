@@ -10,6 +10,7 @@
   <script src="boot/qs.min.js"></script>
   <style>
     *{
+      margin: 0;
       box-sizing: border-box;
     }
     #header{
@@ -28,7 +29,7 @@
       width: 1000px;
       margin: auto;
     }
-    .taglist a{
+    .taglist .item a{
       width: 120px;
       height: 50px;
       display: block;
@@ -41,7 +42,7 @@
       cursor: pointer;
       margin: auto
     }
-    .taglist a:hover{
+    .taglist .item a:hover{
       opacity: 0.5;
     }
     .item{
@@ -50,8 +51,42 @@
       height: 50px;
       margin-top: 40px;
     }
-    a.checked{
+    .item a.checked{
       color:#fff;
+    }
+    .img{
+      float: left;
+      width: 19%;
+      height: 150px;
+      border:1px solid #87CEFF;
+      border-radius: 2px;
+      position: relative;
+    }
+    .img+.img{
+      margin-left:10px; 
+    }
+    .img img{
+      width: 100%;
+      height: 100%;
+      display:block;
+    }
+    .img img:hover{
+      opacity: 0.6;
+    }
+    i{
+      position:absolute;
+      right: 0;
+      top:0;
+      width: 20px;
+      height: 20px;
+      z-index:999;
+      background-image: url('./user/img/close.png');
+      background-size:20px 20px;
+      display: none;
+      cursor: pointer;
+    }
+    .imglist a:hover i{
+      display: block;
     }
   </style>
 </head>
@@ -82,8 +117,17 @@
         <a href="" id="11">暗黑</a>
         <a href="" id="12">游戏</a>
       </div> -->
-      <div class="item" v-for="(item,i) of taglist" :key="i" :data-i="i">
-        <a href="javascript:;" :style="bgcolor" class="">{{taglist[i].name}}</a>
+      <div class="item" v-for="(item,i) of taglist" :key="i" >
+        <a  :data-i="i" href="javascript:;" :style="{background:'#fff','border-color':taglist[i].bdcol,color:taglist[i].bdcol
+      }" class="">{{taglist[i].name}}</a>
+      </div>
+      <div class="imglist hidden">
+        <a class="img"><img src="./hua/06474f92685f3c957dd0e94eb80d1679.jpg">
+          <i class="img-close-icon"></i></a>
+        <div class="img"><img src="./hua/06474f92685f3c957dd0e94eb80d1679.jpg"></div>
+        <div class="img"><img src="./hua/06474f92685f3c957dd0e94eb80d1679.jpg"></div>
+        <div class="img"><img src="./hua/06474f92685f3c957dd0e94eb80d1679.jpg"></div>
+        <div class="img"><img src="./hua/06474f92685f3c957dd0e94eb80d1679.jpg"></div>
       </div>
     </div>
   </div>
@@ -91,29 +135,32 @@
     var vm=new Vue({
       el:"#app",
       data:{ 
-        bgcolor:{
-          background:"#fff",
-          'border-color':"#67c23a",
-          color:"#67c23a"
-        },
         taglist:[{id:0,name:"淡雅",bdcol:"#67c23a"},
-        {id:1,name:"动漫",bdcol:"#67c23a"},
-        {id:2,name:"风景",bdcol:"#67c23a"},
-        {id:3,name:"搞笑",bdcol:"#67c23a"},
-        {id:4,name:"简约",bdcol:"#67c23a"}]
+        {id:1,name:"动漫",bdcol:"#ff3300"},
+        {id:2,name:"风景",bdcol:"#87CEFF"},
+        {id:3,name:"搞笑",bdcol:"#FFC125"},
+        {id:5,name:"简约",bdcol:"#E3E3E3"},
+        {id:6,name:"清新",bdcol:"#90EE90"},
+        {id:7,name:"炫酷",bdcol:"#8968CD"},
+        {id:8,name:"电影",bdcol:"#FF34B3"},
+        {id:9,name:"人物",bdcol:"	#EEEE00"},
+        {id:10,name:"萌宠",bdcol:"#FF83FA"},
+        {id:11,name:"暗黑",bdcol:"#242424"},
+        {id:12,name:"游戏",bdcol:"#63B8FF"}
+        ]
       },
       methods: {
         change(e){
           if(e.target.nodeName=="A"){
-            if(e.target.className==""){
             var i=parseInt(e.target.dataset.i);
-            e.target.style.background="#67c23a";
+            if(e.target.className==""){
+            e.target.style.background=this.taglist[i].bdcol;
             e.target.style.color="#fff";
             e.target.className="checked";
             }else{
             e.target.className="";
             e.target.style.background="#fff";
-            e.target.style.color="#67c23a";
+            e.target.style.color=this.taglist[i].bdcol;
             }
           }
         }

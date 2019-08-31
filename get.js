@@ -4,23 +4,41 @@ const pool=require("./Pool.js");
 var router=express.Router();
 
 //查询usr_info表信息
+// router.get("/v1/userGet",(req,res)=>{
+//   var obj=req.query;
+//   var $uid=obj.uname;
+//   var $upwd=obj.upwd;
+//   var sql="select * from user_info where (user_name=? or user_email=? or user_phone=?) and user_upwd = ?";
+//   pool.query(sql,[$uid,$uid,$uid,$upwd],(err,result)=>{
+//     if(err) throw err;
+//     console.log(result)
+//     if(result.length>0){
+//       res.send("1");
+//     }else{
+//       res.send("0");
+//     }
+//   });
+// });
 router.get("/v1/userGet",(req,res)=>{
   var obj=req.query;
   var $uid=obj.uname;
-  var $upwd=obj.upwd;
-  var sql="select * from user_info where user_name=?|user_email=?|user_phone=? and user_upwd = ?";
-  pool.query(sql,[$uid,$uid,$uid,$upwd],(err,result)=>{
+  var sql="select * from user_info where user_name=?";
+  pool.query(sql,[$uid],(err,result)=>{
     if(err) throw err;
-    if(result>0){
+    //console.log(result)
+    if(result.length>0){
       res.send("1");
+      return;
     }else{
       res.send("0");
+      return;
     }
   });
 });
 
 //图片相关路由
-router.get("/v1/setImg",(err,result)=>{
+router.get("/v1/setImg",(req,res)=>{
+  var obj=req.query;
   var $imgIcon=obj.imgIcon;
   var $uname=obj.uname;
   var $chose1=obj.Chose1;

@@ -4,7 +4,7 @@ create database xinfeg charset=UTF8;
 
 use xinfeg;
 create table header_img(
-  header_img_icon char(5) primary key,
+  header_img_icon char(10) primary key,
   header_img_index varchar(100) not null unique
 );
  
@@ -519,7 +519,7 @@ create table user_info(
   user_birthday date,
   user_city varchar(20),
   user_startTime datetime default null,
-  foreign key (header_img_icon) references header_img(header_img_icon)
+  -- foreign key (header_img_icon) references header_img(header_img_icon)
 );
 
 INSERT INTO  user_info VALUES("xiaoyuhang","123456789",0,"管理员","兔砸儿",18160746306,"3159760238@qq.com","1998-06-10","江西南昌",null);
