@@ -35,6 +35,7 @@ import lookpic from "./components/lookpic"
 import addpic from "./components/addpic"
 import detepic from "./components/detepic"
 import text from "./components/text"
+import orgin from "./components/orgin"
 
 Vue.config.productionTip = false
 Vue.component("my-header",header)
@@ -50,6 +51,7 @@ Vue.component("my-text",text)
 Vue.component("detepic",detepic)
 Vue.component("addpic",addpic)
 Vue.component("lookpic",lookpic)
+Vue.component("orgin",orgin)
 
 new Vue({
   router,

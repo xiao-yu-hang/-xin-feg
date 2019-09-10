@@ -1,13 +1,14 @@
 <template>
-<div class="back">
-  <img src="../../public/img/back.png" id="back" @click="goback"><label for="back">返回</label> 
+<div class="back" @click="goback">
+  <img src="../../public/img/back.png" id="back" ><label for="back">返回</label> 
 </div>
 </template>
 <script>
   export default {
     methods: {
       goback() {
-        console.log('go back');
+        if(history.length!=0)
+        history.go(-1);
       }
     }
   }

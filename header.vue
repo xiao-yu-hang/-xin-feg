@@ -14,7 +14,7 @@
       <router-link to="#"><img src="../../public/img/personal.png" alt="个人"></router-link> 
     </div>
     <div class="icon1 col-md-4 col-sm-12 mt-md-4 pr-0 pl-5 mt-sm-2 dip">
-      <span class=" text-danger">您还未登录，请登录后操作。</span>
+      <span class="login">您还未 <a href="">登录</a>,如您还没有账号,请先 <a href="">注册</a> 。</span>
     </div>
   </div>
 </template>
@@ -35,13 +35,25 @@ export default{
       var url="/get/v1/getState";
       this.axios.get(url).then(
         res=>{
-          var state=res.data.code;
-          if(state==1){
+          var state=res.data.id;
+          this.$store.commit("setState",state);
+          if(state!=0){
             $(".dip").addClass("in");
             $(".dsp").removeClass("in");
           }       
           }
       );
+      var imgicon=this.$route.query.img_icon; 
+      if(imgicon!=""){
+      var obj={imgIcon:imgicon}
+      this.$store.commit("setimgIcon",imgicon);
+      this.axios.get("/get/v1/setImg",{params:obj}).then(
+        res=>{
+           var pic1=res.data;
+           this.$store.commit("setPic",pic1);
+        }
+      );
+      }
     },
     search(){
        var $val=$(":text").val().trim();
@@ -54,12 +66,9 @@ export default{
        var obj={imgIcon:$val};
        this.axios.get(url,{params:obj}).then(
          res=>{
-          //  console.log(res);
-          //  var imgindex=res.data[0].img_index;
-          //  var imgid=res.data[0].img_id;
            var pic1=res.data;
-          //  console.log(this.imgindex);
            this.$store.commit("setPic",pic1);
+           this.$router.push({path:'/search'});
          }
        );
     },
@@ -68,7 +77,8 @@ export default{
         if(event.keyCode==13){
          this.search();
         }
-      }
+      },
+    
     }
   }
 </script>

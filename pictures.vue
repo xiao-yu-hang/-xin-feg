@@ -25,9 +25,12 @@ export default{
   data(){
     return{
       arr:[],
-      start:0,
-      num:0,
+      start:9,
+      num:10,
     }
+  },
+  created(){
+    this.btn();
   },
   methods:{
     allpic(){
@@ -37,14 +40,17 @@ export default{
        this.axios.get(url,{params:obj1}).then(
          res=>{
            this.num=res.data.length;
-         }
-       );
+         });
     },
-    next(){
+    next(event){
        $("button:first").attr("disabled",false);
        var url="/get/v1/setImg";
        this.allpic();
        var icon=this.$store.getters.getimgIcon;
+       if(icon==""){
+         $(event.target).attr("disabled","ture");
+         return;
+       }else{
        this.start+=9;
        if(this.start<this.num){
        var obj={imgIcon:icon,start:this.start};
@@ -53,17 +59,22 @@ export default{
            var pic1=res.data;
            this.$store.commit("setPic",pic1);
          }
-       );
-       }
-      else{
-         $("button:last").attr("disabled","ture");
-       }
+         );
+       }else{
+         $(event.target).attr("disabled","ture");
+       }}
     },
-    pre(){
+    pre(event){
       $("button:last").attr("disabled",false);
       var url="/get/v1/setImg";
        this.allpic();
        var icon=this.$store.getters.getimgIcon;
+      //  console.log(icon);
+       if(icon=="")
+       {
+         $(event.target).attr("disabled","ture");
+         return;
+         }else{
        if(this.start>0){
        this.start-=9;  
        var obj={imgIcon:icon,start:this.start};
@@ -72,15 +83,21 @@ export default{
            var pic1=res.data;
            this.$store.commit("setPic",pic1);
         }); 
-    }else{
-         $("button:first").attr("disabled","ture");
-       }
+        }else{
+         $(event.target).attr("disabled","ture");
+       }}
     },
     picture(event){
        var node=event.currentTarget.lastElementChild;
        var  id=node.textContent;
        console.log(id);             
        this.$router.push({path:'/detail',query:{img_id:id}});
+    },
+    btn(){
+      setInterval(function(){
+        $("button:last").attr("disabled",false);
+         $("button:first").attr("disabled",false);
+      },2000);
     }
   }
 }
