@@ -6,10 +6,11 @@
         <el-breadcrumb-item v-for="(item,index) in page" :key="index"><a href="">{{item}}</a></el-breadcrumb-item>
         </el-breadcrumb>
       </legend>	
+      <back></back>
 	    <div class="row m-3 mt-3">
           <div class="col-md-1"></div>
           <div class="image col-md-6">
-            <img src="https://pic.superbed.cn/item/5d521208451253d178641d47.jpg">
+            <img :src="imgindex">
           </div>
           <div class="col-md-1"></div>
           <div class="info col-md-4">
@@ -41,7 +42,7 @@
 export default{
   data(){
     return{
-      icon:["清新","自然","植物","海洋"],
+      icon:[],
       page:['首页','图片商城','图片详情'],
       img:[
         { src:"https://pic.superbed.cn/item/5d521203451253d178641c57.jpg" },
@@ -50,7 +51,28 @@ export default{
         { src:"https://pic.superbed.cn/item/5d5211ef451253d178641a4f.jpg" },
         { src:"https://pic.superbed.cn/item/5d5211c1451253d1786416ca.jpg" },
         { src:"https://pic.superbed.cn/item/5d520d57451253d17863c0de.jpg" }
-      ]
+      ],
+      imgindex:""
+    }
+  },
+  created(){
+    this.loadpic();
+  },
+  methods:{
+    loadpic(){
+      var id=this.$route.query;
+      var uid=id.img_id;
+      console.log(uid);
+      var obj={imgId:uid};
+      var url="/get/v1/setImg";
+      this.axios.get(url,{params:obj}).then(
+        res=>{
+          this.imgindex=res.data[0].img_index;
+          console.log(res.data);
+          this.icon=res.data[0].img_icon.split(","); 
+          console.log(this.icon);
+        }
+      );
     }
   }
 }
